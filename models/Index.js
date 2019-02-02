@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 
 require('./User')
+require('./Ocorrencia')
 
 const options = {
   autoIndex: false, // Don't build indexes

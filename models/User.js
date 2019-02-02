@@ -4,29 +4,25 @@ const Schema = mongoose.Schema
 const autopopulate = require('mongoose-autopopulate')
 
 const User = new Schema({
-  username: {
+  nome: {
     type: String,
     required: [true, 'user not specified'],
     unique: [true, 'Já existe um usuário com user!']
   },
-  password: {
+  senha: {
     type: String,
     required: true
   },
-  email: String,
-  type: {
-    type: String,
-    required: true
-  }
+  email: String
 })
 
-User.methods.checkPassword = function (password) {
-  let resut = this.password === md5(password)
+User.methods.checkPassword = function (senha) {
+  let resut = this.senha === md5(senha)
   return resut
 }
 
-User.methods.hashPassword = function (password) {
-  return md5(password)
+User.methods.hashPassword = function (senha) {
+  return md5(senha)
 }
 
 /*
