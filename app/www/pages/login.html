@@ -1,15 +1,23 @@
 <template>
   <div class="page no-toolbar no-navbar">
     <div class="page-content login-screen-content background background-login">
+      <!-- Preloader -->
+      <div class="block align-items-stretch text-align-center " id="preloader" style="margin-top:40vh">
+        <div class="text-align-center">
+          <div class="col-25">
+            <div class="preloader" style="width: 60px; height: 60px"></div>
+          </div>
+        </div>
+      </div>
 
-
-      <form class="height-top-40vh padd-lr-5vw">
+      <form class="height-top-40vh padd-lr-5vw form">
         <div class="list">
           <ul>
             <li class="item-content item-input item-input-with-value">
               <div class="item-inner">
                 <div class="item-input-wrap">
-                  <input type="text" placeholder="Usuário" id="input-login-user" name="username" class="input-with-value" required="required">
+                  <input type="email" placeholder="Email" id="email" name="email" class="input-with-value"
+                    required="required">
                   <span class="input-clear-button"></span>
                 </div>
               </div>
@@ -18,7 +26,8 @@
             <li class="item-content item-input">
               <div class="item-inner">
                 <div class="item-input-wrap">
-                  <input type="password" placeholder="Senha" id="input-login-pws" name="password" class="font-serrat input-with-value" required="required">
+                  <input type="password" placeholder="Senha" id="senha" name="senha" class="font-serrat input-with-value"
+                    required="required">
                 </div>
               </div>
             </li>
@@ -27,12 +36,12 @@
         <div class="list">
           <ul>
             <li>
-              <a href="#" class="list-button" id="button-login" @click="signIn">Sign In</a>
+              <a href="#" class="list-button" id="button-login" @click="signIn">Entrar</a>
             </li>
           </ul>
         </div>
       </form>
-      <div class="link-login-rec"><a href="/esqueciSenha/" class="font-serrat link-login-rec-a">Esqueci Minha Senha</a></div>
+      <div class="link-login-rec"><a href="/registro/" class="font-serrat link-login-rec-a">REGISTRO</a></div>
 
     </div>
   </div>
@@ -46,33 +55,90 @@
         usuariosLogados: [
           {
             name: localStorage.userPerfilName,
-            username: localStorage.username
+            email: localStorage.email
           }
 
 
         ]
       }
     },
+    on: {
+      pageInit: function () {
+        var $ = this.$;
+        $('.form').hide();
+        var app = this.$app;
+        var router = this.$router;
+        if (localStorage.logged === 'true') {
+          app.dialog.alert('Seja Bem Vindo ' + localStorage.email, function () {
+            app.loginScreen.close();
+            router.navigate('/menu/');
+          })
+        } else {
+          $('#preloader').hide();
+          $('.form').show();
+        }
+      }
+    },
     methods: {
       signIn: function () {
         var $ = this.$;
+        $('.form').hide()
+        $('#preloader').show()
         var app = this.$app;
         var router = this.$router;
-        var username = $('input#username').val();
-        var password = $('input#password').val();
+        var email = $('input#email').val();
+        var senha = $('input#senha').val();
+        let data = { email: email, senha: senha }
+        console.log(data);
         
-        let data = { username: username, password: password }
+        let url = `${URLSERVER}/api/login`
+        if (email && senha) {
+          fetch(url,
+            {
+              method: "post",
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(user => {
+              console.log(user);
+              
+              if (!user) {
+                app.dialog.alert('Dados inválidos', function () { });
+                $('#preloader').hide();
+                $('.form').show();
+              }
+              else {
+                localStorage.logged = true;
+                localStorage.nome = user.nome;
+                localStorage.userID = user._id;
+                localStorage.email = user.email;
 
-        if ((username && password)) {
-          router.navigate('/menu/');
+                localStorage.setItem(localStorage.userID + '-todasCriancas', JSON.stringify(user.criancas));
+                let minhasCriancas = JSON.parse(localStorage.getItem(localStorage.userID + '-minhasCriancas'));
+                localStorage.setItem(localStorage.userID + '-minhasCriancas', JSON.stringify(minhasCriancas ? minhasCriancas : []));
+                this.$app.data.email = localStorage.email;
+                app.dialog.alert('Seja Bem Vindo ' + email, function () {
+                  app.loginScreen.close();
+                  router.navigate('/menu/');
+                })
+              }
+            })
+            .catch(function (error) {
+              console.log('Request failure: ', error);
+              app.dialog.alert('E ' + error, function () {
+                app.loginScreen.close();
+                $('#preloader').hide();
+                $('.form').show();
+              })
+            });
         } else {
-          app.dialog.alert('Seja Bem Vindo!', function () { router.navigate('/menu/'); })
+          app.dialog.alert('Informe seus dados', function () { })
+          $('#preloader').hide()
+          $('.form').show();
         }
-      },
-      setUser: function (username) {
-        this.$('#username').value = username;
-        document.getElementById('username').value = username;
-        this.$app.data.username = username;
       }
     }
   }

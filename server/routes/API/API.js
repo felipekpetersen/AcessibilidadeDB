@@ -31,12 +31,12 @@ router.post('/login', async function (req, res, next) {
             email: email
         }).exec()
         if (user && user.checkPassword(senha)) {
-            res.json({ resposta: true })
+            res.json(user)
         } else {
-            res.json({ resposta: false })
+            res.json(false)
         }
     } catch (err) {
-        res.json({ resposta: false })
+        res.json(false)
     }
 });
 

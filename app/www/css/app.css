@@ -514,3 +514,15 @@
     height: 5vh;
     
 }
+
+input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:-internal-autofill-previewed, textarea:-internal-autofill-selected, select:-internal-autofill-previewed, select:-internal-autofill-selected {
+    background-color: rgb(250, 255, 189) !important;
+    background-image: none !important;
+    color: rgb(0, 0, 0) !important;
+    border-radius: 3px;
+    padding: 1vh;
+}
+
+.height-top-30vh{
+    margin-top: 30vh;
+}

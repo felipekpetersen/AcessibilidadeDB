@@ -1,5 +1,5 @@
 var $ = Dom7;
-
+var URLSERVER = 'http://localhost:3000'
 var DB = new dataBank();
 
 // Init App
@@ -25,8 +25,8 @@ var app = new Framework7({
     path: '/perfil/',
     componentUrl: './pages/perfil.html'
   }, {
-    path: '/esqueciSenha/',
-    componentUrl: './pages/esqueciSenha.html'
+    path: '/registro/',
+    componentUrl: './pages/registro.html'
   }, {
     path: '/99/',
     componentUrl: './pages/99.html'

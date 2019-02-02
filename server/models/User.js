@@ -6,14 +6,17 @@ const autopopulate = require('mongoose-autopopulate')
 const User = new Schema({
   nome: {
     type: String,
-    required: [true, 'user not specified'],
-    unique: [true, 'Já existe um usuário com user!']
+    required: true
   },
   senha: {
     type: String,
     required: true
   },
-  email: String
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  }
 })
 
 User.methods.checkPassword = function (senha) {
@@ -24,12 +27,6 @@ User.methods.checkPassword = function (senha) {
 User.methods.hashPassword = function (senha) {
   return md5(senha)
 }
-
-/*
-User.pre('save', function (next) {
-  this.password = md5(this.password)
-  next()
-})*/
 
 User.plugin(autopopulate)
 mongoose.model('User', User)
