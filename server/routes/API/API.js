@@ -40,7 +40,7 @@ router.post('/login', async function (req, res, next) {
     }
 });
 
-router.post('/ocorrencias', async (req, res, next) => {
+router.post('/ocorrencia', async (req, res, next) => {
     try {
         console.log("here")
         let novaOcorrencia = new Ocorrencia(req.body)
@@ -54,4 +54,19 @@ router.post('/ocorrencias', async (req, res, next) => {
 
     }
 })
+
+router.get('/ocorrencias', async (req, res, next) => {
+    try {
+        let ocorrencias = await Ocorrencia.find({})
+        res.json(ocorrencias)
+
+    } catch (err) {
+        console.log('Error: ', err)
+        res.json({ resposta: false })
+
+    }
+})
+
 module.exports = router;
+
+

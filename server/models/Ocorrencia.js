@@ -3,12 +3,14 @@ const Schema = mongoose.Schema
 const autopopulate = require('mongoose-autopopulate')
 
 const Ocorrencia = new Schema({
-  location: {
+  localizacao: {
     lat: String,
-    long: String
+    lng: String
   },
-  category: String,
-  subcategory: String
+  categoria: String,
+  subcategoria: String,
+  likes: Number,
+  dislikes: Number
 })
 
 
