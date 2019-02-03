@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <div class="page-content background-perfil">
+    <div class="page-content background-menu">
       <div class="nav-perfil">
         <a href="/menu/" class="link back">
           <i class="icon icon-back color-white"></i>
@@ -88,7 +88,7 @@
         <hr class="hr-personalizado">
 
         <div class="links-perfil">
-          <a @click="sair">Sair</a>
+          <a @click="sair" class="color:#05c187">Sair</a>
         </div>
       </div>
     </div>
@@ -117,10 +117,17 @@
     justify-content: center;
     align-items: center;
     align-content: stretch;
-    background-color: #00e09a;
+    background-color: #0fb7828c;
     border-radius: 5px;
     height: 13vh;
     width: 80vw;
+}
+.aprensentacao-perfil-nome p b {
+    color: #0fb7828c;
+    margin-left: 0.6px;
+}
+.card{
+  opacity: 0.9;
 }
 </style>
 <script>

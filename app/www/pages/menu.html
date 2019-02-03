@@ -7,12 +7,37 @@
       </div>
 
       <div id="mapGoogle" style="height:100vh; width:100vw; position:relative;"></div>
-      <div class="list btn-nova-ocorrencia" style="text-align:center">
-        <ul>
-          <li>
-            <a href="/novaOcorencia/" class="list-button" id="button-reset3">Nova Ocorrência</a>
-          </li>
-        </ul>
+
+
+      <div style="display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        align-items: center;
+        align-content: stretch;">
+
+
+        <div class="list btn-nova-ocorrencia" style="text-align:center">
+          <ul>
+            <li>
+              <a href="/novaOcorencia/" class="list-button" id="button-reset3" style="width:60vw">Nova Ocorrência</a>
+            </li>
+          </ul>
+        </div>
+        <div class="list btn-nova-ocorrencia" style="text-align:center">
+            <ul>
+              <li>
+                <a href="https://www.messenger.com/t/mogicidade" class="list-button" id="button-reset3" style="
+                width: 19vw;
+                height: 13vw;
+                margin-left: 68vw;
+                font-size: 14vw;
+                background-color: transparent;
+                color: #365b97;"><i class="fab fa-facebook-messenger"></i></a>
+              </li>
+            </ul>
+          </div>
+
       </div>
 
     </div>
@@ -33,6 +58,9 @@
   </div>
 </template>
 <style>
+  .md .list ul:after {
+    background-color: rgba(0,0,0,0);
+}
   .demo-card-header-pic .card-header {
     height: 40vw;
     background-size: cover;
@@ -43,6 +71,10 @@
   .demo-card-header-pic .centered {
     padding-left: 42%;
   }
+  .md .list ul:before {
+    background-color: rgba(0, 0, 0, 0);
+    
+}
 </style>
 
 <script>
@@ -53,11 +85,11 @@
     on: {
       pageInit: function () {
         initMap()
-       
+
       }
     },
     methods: {
-      
+
     }
   }
 </script>

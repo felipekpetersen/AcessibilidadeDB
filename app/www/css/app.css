@@ -559,7 +559,3 @@ input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:
     z-index: 100;
     margin-left: 159px;
 }
-
-.padding-none{
-    padding: 0 !important;
-}

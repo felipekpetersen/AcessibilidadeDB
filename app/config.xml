@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.MaatheusGois.merxfintech" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>Merx Fintech</name>
+    <name>Mogicidade</name>
     <description>
-        Aplicativo para gerentciamento de benefícios.
+        Aplicativo para monitoramento colaborativo da Cidade.
     </description>
     <author email="matheusgoislimasilva@gmail.com" href="https://github.com/MaatheusGois/">
         Matheus Gois
