@@ -53,7 +53,7 @@ function initMap(localizacao = { lat: -23.547, lng: -46.213 }) {
     function initMarkers(){
         const iteraOcorrencia = (json) => {
             json.forEach( e => {
-                e.content = `${e.categoria}->${e.subcategoria} | ^${e.likes} -${e.deslikes}`;
+                e.content = `${e.categoria}->${e.subcategoria} | ^${e.data}`;
                 addMarker(e);
             });
         }
