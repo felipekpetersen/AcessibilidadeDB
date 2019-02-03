@@ -1,5 +1,5 @@
 var $ = Dom7;
-var URLSERVER = 'http://localhost:3000'
+var URLSERVER = 'http://192.168.0.34:3000'
 var DB = new dataBank();
 // Init App
 var app = new Framework7({
