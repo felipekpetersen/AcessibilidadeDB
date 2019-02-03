@@ -63,6 +63,10 @@
     },
     on: {
       pageInit: function () {
+        let historico = JSON.parse(localStorage.getItem(localStorage.userID+'-historico'));
+        if(!historico){
+          localStorage.setItem(localStorage.userID + '-historico', JSON.stringify([]));
+        }
         var $ = this.$;
         $('.form').hide();
         var app = this.$app;

@@ -7,12 +7,45 @@
         </a>
       </div>
       <div class="aprensentacao-perfil">
-        <div class="aprensentacao-perfil-imagem">
+        <!-- <div class="aprensentacao-perfil-imagem">
 
-        </div>
-        <div class="aprensentacao-perfil-nome">
-          <p>Olá,<b> Fernando</b></p>
-          <p>22 anos, SP</p>
+        </div> -->
+        <div class="aprensentacao-perfil-nome" style="	display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        align-content: center;">
+          <p><b>Nome: </b>{{nome}}</p>
+          <p><b>Email: </b>{{email}}</p>
+          <!-- <p><b></b>{{nome}}</p> -->
+          <!-- <div class="item-input-wrap">
+            <input type="date" placeholder="Nascimento" id="date" name="date" value:`{{date}}` class="font-serrat input-with-value"
+              required>
+          </div>
+          <div class="item-input-wrap">
+            <input type="text" placeholder="Nascimento" id="nascimento" name="nascimento" value:`{{date}}` class="font-serrat input-with-value"
+              required>
+          </div>
+          <div class="list">
+            <ul>
+              <li>
+                <a class="item-link smart-select smart-select-init" data-open-in="sheet">
+                  <select name="mac-windows" id="tipoDeOcorrencia">
+                    <option class="text-light-gray" value="Policiais" selected>Policiais</option>
+                    <option class="text-light-gray" value="Ambientais">Ambientais</option>
+                  </select>
+
+                  <div class="item-content">
+                    <div class="item-inner ">
+                      <div class="item-title text-light-gray">Tipo</div>
+                    </div>
+                  </div>
+
+                </a>
+              </li>
+            </ul>
+          </div> -->
         </div>
       </div>
 
@@ -20,33 +53,38 @@
 
       <div class="" id="card-menu">
         <div class="card-h-a">
-          <p class="colorWhite card-h-p1-a">Seu saldo atual é de</p>
-          <p class="colorWhite card-h-p2-a">R$ 304,00</p>
+          <!-- <p class="colorWhite card-h-p1-a">Seu saldo atual é de</p> -->
+          <p class="colorWhite card-h-p2-a">Histórico</p>
         </div>
-        <div class="card-f-a">
-          <p class="card-f-p1-a">Adiquira mais creditos</p>
+      </div>
+      <div class="media-list searchbar-found inset" style="display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          align-content: center;  margin: 0">
+        <div class="list searchbar-found list1" style="  width: 84vw; margin: 0">
+          <ul>
+            {{#each historico}}
+            <li>
+              <div class="card demo-card-header-pic">
+                <div class="card-content card-content-padding cardMenu" style="padding:5px; text-align:center; padding-left:15px">
+                  <div class="item-inner">
+                    <div class="item-title-row">
+                      <div class="item-title item-title1">{{subcategoria}} - {{data}}</div>
+                    </div>
+                    <div class="item-after">{{categoria}}</div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            {{/each}}
+          </ul>
         </div>
       </div>
 
       <div class="links-perfil-c">
-        <div class="links-perfil">
-          <a>Histórico</a>
-        </div>
-        <hr class="hr-personalizado">
 
-        <div class="links-perfil">
-          <a>Configurações</a>
-        </div>
-        <hr class="hr-personalizado">
-
-        <div class="links-perfil">
-          <a>Empresa</a>
-        </div>
-        <hr class="hr-personalizado">
-
-        <div class="links-perfil">
-          <a>Ajuda</a>
-        </div>
         <hr class="hr-personalizado">
 
         <div class="links-perfil">
@@ -60,11 +98,38 @@
   </div>
   </div>
 </template>
+<style>
+  .links-perfil {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+    margin-right: 46px;
+    font-size: 1.5em;
 
+  }
+  .card-h-a {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    background-color: #00e09a;
+    border-radius: 5px;
+    height: 13vh;
+    width: 80vw;
+}
+</style>
 <script>
   return {
     data: function () {
       return {
+        nome: localStorage.nome,
+        email: localStorage.email,
+        historico: JSON.parse(localStorage.getItem(localStorage.userID + '-historico'))
       }
     },
     on: {
