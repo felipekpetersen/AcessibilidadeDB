@@ -1,28 +1,18 @@
 <template>
   <div class="page no-swipeback">
     <div class="page-content background-menu">
+
       <div class="perfil">
         <a href="/perfil/" class="img-perfil"></a>
       </div>
 
-      <a href="/historico/">
-        <div class="" id="card-menu">
-          <div class="card-h">
-            <p class="colorWhite card-h-p1">Seu saldo atual é de</p>
-            <p class="colorWhite card-h-p2">R$ 304,00</p>
-          </div>
-          <div class="card-f">
-            <p class="card-f-p1">Adiquira mais creditos</p>
-          </div>
-        </div>
-      </a>
-      <div class="possibilidades-menu">
-        <p class="possibilidades-menu-p">> Suas Possibilidades</p>
-      </div>
-      <div class="butons-menu-app">
-        <a href="/99/" class="list-button button-login">99</a>
-        <a href="/yellow/" class="list-button button-login">YELLOW</a>
-        <a href="/bilheteUnico/" class="list-button button-login">BILHETE ÚNICO</a>
+      <div id="mapGoogle" style="height:70vh; width:80vw;"></div>
+      <div class="list" style="text-align:center">
+        <ul>
+          <li>
+            <a href="/novaOcorencia/" class="list-button" id="button-reset3">Nova Ocorrência</a>
+          </li>
+        </ul>
       </div>
 
     </div>
@@ -54,6 +44,7 @@
     padding-left: 42%;
   }
 </style>
+
 <script>
   return {
     data: function () {
@@ -61,6 +52,7 @@
     },
     on: {
       pageInit: function () {
+        initMap()
         var items = DB.criancas;
         let data = { userID: localStorage.userID, type: localStorage.type, crecheID: localStorage.crecheID }
         let url = 'http://201.6.243.44:3877/api/listagemDeCriancas';

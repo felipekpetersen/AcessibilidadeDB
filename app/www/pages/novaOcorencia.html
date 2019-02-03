@@ -1,0 +1,121 @@
+<template>
+  <div class="page no-swipeback">
+    <div class="page-content background-menu">
+      <div class="nav-perfil">
+        <a href="#" class="link back">
+          <i class="icon icon-back color-white"></i>
+        </a>
+      </div>
+      <form class="height-top-30vh padd-lr-5vw">
+        <div class="list">
+          <ul>
+            <li class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="text" placeholder="Nome" id="nome-registro" name="nome" class="font-serrat input-with-value"
+                    required="required">
+                </div>
+              </div>
+            </li>
+            <li class="item-content item-input item-input-with-value">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="email" placeholder="E-mail" id="email-registro" name="email" class="input-with-value"
+                    required="required">
+                  <span class="input-clear-button"></span>
+                </div>
+              </div>
+            </li>
+            <div></div>
+            <li class="item-content item-input">
+              <div class="item-inner">
+                <div class="item-input-wrap">
+                  <input type="password" placeholder="Senha" id="senha-registro" name="senha" class="font-serrat input-with-value"
+                    required="required">
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+        <div class="list">
+          <ul>
+            <li>
+              <a href="#" class="list-button" id="button-reset3" @click="registro" style="text-align:center">Registrar</a>
+            </li>
+          </ul>
+        </div>
+      </form>
+      <div class="popover popover-links">
+        <div class="popover-inner">
+          <div class="list">
+            <ul>
+              <li>
+                <a class="list-button item-link" href="/profile/" @click="BTNprofile">Meu Perfil</a>
+              </li>
+              <li>
+                <a class="list-button item-link" @click="confirmaSair" href="#">Sair</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
+<style>
+  .demo-card-header-pic .card-header {
+    height: 40vw;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+
+  .demo-card-header-pic .centered {
+    padding-left: 42%;
+  }
+</style>
+<script>
+  return {
+    data: function () {
+      return { titulo: 'Menu', nomeDeUsuario: this.$app.data.username }
+    },
+    on: {
+      pageInit: function () {
+        var items = DB.criancas;
+        let data = { userID: localStorage.userID, type: localStorage.type, crecheID: localStorage.crecheID }
+        let url = 'http://201.6.243.44:3877/api/listagemDeCriancas';
+        fetch(url,
+          {
+            method: "post",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          })
+          .then(res => res.json())
+          .then(res => {
+            localStorage.setItem('crianca', JSON.stringify(res))
+          })
+          .catch((error) => {
+            console.log('Request failure: ', error);
+          })
+      }
+    },
+    methods: {
+      confirmaSair: function () {
+        var $ = this.$;
+        var app = this.$app;
+        var router = this.$router;
+        app.dialog.confirm('Tem certesa que deseja sair?', function () {
+          app.dialog.alert('Até logo!');
+          // TODO: User Logout
+          app.popover.close('.popover-links');
+          router.navigate('/index/');
+        });
+      },
+      BTNprofile: function () {
+        app.popover.close('.popover-links');
+      }
+    }
+  }
+</script>

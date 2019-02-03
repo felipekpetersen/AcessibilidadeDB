@@ -3,7 +3,7 @@
 }
 
 .background-index{
-    background: url("../img/tela-abertura.png");
+    background: url("../img/tela-abertura.jpg");
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover;
@@ -38,18 +38,20 @@
 }
 
 .background-menu{
-    background: url("../img/tela-home.png");
+    background: url("../img/tela-home.jpg");
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover;
 }
 
 .background-login{
-    background: url("../img/tela-login.png");
+    background: url("../img/tela-login.jpg");
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover;
 }
+
+
 
 .font-serrat{
     font-family: 'Montserrat', sans-serif;
@@ -67,7 +69,7 @@
     border-radius: 10px;
     margin-left: 5vw;
     margin-right: 5vw;
-    color: #019768;
+    color: #058179;
     font-size: 1.3em;
 }
 
@@ -102,7 +104,7 @@
 }
 
 .link-login-rec .link-login-rec-a{
-    color: #f3f3f3;
+    color: #f3f3f3d8;
 
 }
 
@@ -125,11 +127,11 @@
 }
 
 #button-reset2{
-    background-color: #012224;
+    background-color: #3e397b;
     border-radius: 10px;
     margin-left: 5vw;
     margin-right: 5vw;
-    color: #019768;
+    color: #559fa1;
     margin-top: 5vh;
     font-size: 1.3em;
 }
@@ -237,7 +239,7 @@
 }
 
 .perfil{
-    height: 20vh;
+    height: 12vh;
     width: 100vw;
     display: flex;
 	flex-direction: column;
@@ -525,4 +527,21 @@ input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:
 
 .height-top-30vh{
     margin-top: 30vh;
+}
+
+#senha::placeholder, #email-registro::placeholder,#senha-registro::placeholder,#nome-registro::placeholder, #email::placeholder {
+    color: #f3f3f39f;
+}
+
+.md .dialog-button {
+    color: #380b4a;
+}
+#button-reset3 {
+    background-color: #3e397b;
+    border-radius: 10px;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    color: #dddaff96;
+    margin-top: 5vh;
+    font-size: 1.3em;
 }

@@ -1,7 +1,6 @@
 var $ = Dom7;
 var URLSERVER = 'http://localhost:3000'
 var DB = new dataBank();
-
 // Init App
 var app = new Framework7({
   name: 'App',
@@ -28,8 +27,8 @@ var app = new Framework7({
     path: '/registro/',
     componentUrl: './pages/registro.html'
   }, {
-    path: '/99/',
-    componentUrl: './pages/99.html'
+    path: '/novaOcorencia/',
+    componentUrl: './pages/novaOcorencia.html'
   }, {
     path: '/bilheteUnico/',
     componentUrl: './pages/bilheteUnico.html'
