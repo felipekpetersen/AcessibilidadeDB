@@ -38,7 +38,7 @@
 }
 
 .background-menu{
-    background: url("../img/tela-home.jpg");
+    background: url("../img/tela-ocorrencia.jpg");
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover;
@@ -239,7 +239,7 @@
 }
 
 .perfil{
-    height: 12vh;
+    height: 16vh;
     width: 100vw;
     display: flex;
 	flex-direction: column;
@@ -253,8 +253,8 @@
     height: 8vh;
     width: 8vh;
     margin-right: 10vw;
-    background-color: #00e09a;
-    background-image: url("../img/jose.jpg");
+    background-color: transparent;
+    /* background-image: url("../img/   jose.jpg"); */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */
     background-size: cover;
@@ -537,11 +537,29 @@ input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:
     color: #380b4a;
 }
 #button-reset3 {
-    background-color: #3e397b;
+    background-color: #365b97;
     border-radius: 10px;
     margin-left: 5vw;
     margin-right: 5vw;
-    color: #dddaff96;
+    color: #dddaff;
     margin-top: 5vh;
     font-size: 1.3em;
+}
+
+.btn-nova-ocorrencia{
+    position: absolute;
+    bottom: 4vh;
+    width: 99vw;
+}
+
+.icon-mate{
+    margin: 0 50%;
+    position: absolute;
+    top: 100px;
+    z-index: 100;
+    margin-left: 159px;
+}
+
+.padding-none{
+    padding: 0 !important;
 }

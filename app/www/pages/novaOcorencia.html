@@ -2,64 +2,80 @@
   <div class="page no-swipeback">
     <div class="page-content background-menu">
       <div class="nav-perfil">
-        <a href="#" class="link back">
+        <a href="/menu/" class="link back">
           <i class="icon icon-back color-white"></i>
         </a>
       </div>
-      <form class="height-top-30vh padd-lr-5vw">
+      <form class="padd-lr-5vw">
         <div class="list">
           <ul>
             <li class="item-content item-input">
               <div class="item-inner">
-                <div class="item-input-wrap">
-                  <input type="text" placeholder="Nome" id="nome-registro" name="nome" class="font-serrat input-with-value"
-                    required="required">
-                </div>
-              </div>
-            </li>
-            <li class="item-content item-input item-input-with-value">
-              <div class="item-inner">
-                <div class="item-input-wrap">
-                  <input type="email" placeholder="E-mail" id="email-registro" name="email" class="input-with-value"
-                    required="required">
-                  <span class="input-clear-button"></span>
-                </div>
-              </div>
-            </li>
-            <div></div>
-            <li class="item-content item-input">
-              <div class="item-inner">
-                <div class="item-input-wrap">
-                  <input type="password" placeholder="Senha" id="senha-registro" name="senha" class="font-serrat input-with-value"
-                    required="required">
+                <div class="item-input-wrap" style="margin-bottom: 30px;">
+                  <input type="text" placeholder="Cep" id="CEP" name="cep" class="font-serrat input-with-value"
+                    required>
                 </div>
               </div>
             </li>
 
+            <li class="item-content item-input item-input-with-value padding-none">
+              <div><i class="f7-icons color-white icon-mate" style="font-size: 6vh;color: #3e397b;">flag_fill</i></div>
+              <div id="map2Google" style="height:35vh;width: 99vw;opacity: 0.8;"></div>
+            </li>
+            <div></div>
           </ul>
         </div>
         <div class="list">
           <ul>
             <li>
-              <a href="#" class="list-button" id="button-reset3" @click="registro" style="text-align:center">Registrar</a>
+              <a class="item-link smart-select smart-select-init" data-open-in="sheet">
+                <select name="mac-windows" id="tipoDeOcorrencia">
+                  <option class="text-light-gray" value="Policiais" selected>Policiais</option>
+                  <option class="text-light-gray" value="Ambientais">Ambientais</option>
+                </select>
+
+                <div class="item-content">
+                  <div class="item-inner ">
+                    <div class="item-title text-light-gray">Tipo</div>
+                  </div>
+                </div>
+
+              </a>
+            </li>
+            <li>
+              <a class="item-link smart-select smart-select-init" id="policiais" data-open-in="sheet">
+                <select name="mac-windows" id="policiaisCategoria">
+                  <option class="text-light-gray" value="Roubo" selected>Roubo</option>
+                  <option class="text-light-gray" value="Furto">Furto</option>
+                  <option class="text-light-gray" value="Violência contra mulher">Violência contra mulher</option>
+                </select>
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title text-light-gray">Categoria</div>
+                  </div>
+                </div>
+              </a>
+
+              <a class="item-link smart-select smart-select-init" id="ambientais" data-open-in="sheet" style="display: none;">
+                <select name="mac-windows" id="ambientaisCategoria">
+                  <option value="Lixo" selected>Lixo</option>
+                  <option value="Ocupações">Ocupações</option>
+                </select>
+                <div class="item-content">
+                  <div class="item-inner ">
+                    <div class="item-title text-light-gray">Categoria</div>
+                  </div>
+                </div>
+              </a>
+
+
+            </li>
+            <li>
+              <a href="#" class="list-button" id="button-reset3" @click="EviandoOcorrencia" style="text-align:center">Registrar</a>
             </li>
           </ul>
         </div>
       </form>
-      <div class="popover popover-links">
-        <div class="popover-inner">
-          <div class="list">
-            <ul>
-              <li>
-                <a class="list-button item-link" href="/profile/" @click="BTNprofile">Meu Perfil</a>
-              </li>
-              <li>
-                <a class="list-button item-link" @click="confirmaSair" href="#">Sair</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
 </template>
 <style>
@@ -73,6 +89,45 @@
   .demo-card-header-pic .centered {
     padding-left: 42%;
   }
+
+  *::placeholder {
+    color: #dddddd !important;
+  }
+
+  .text-light-gray {
+    color: #dddddd !important;
+  }
+
+  .text-light-gray .item-after {
+    color: #dddddd !important;
+  }
+
+  .item-after {
+    color: #dddddd !important;
+
+  }
+
+  .md .toolbar {
+    border-radius: 2px;
+    background-color: #482b7bed;
+  }
+
+  .md .radio input[type=radio]:checked~.icon-radio,
+  .md label.item-radio input[type=radio]:checked~* .icon-radio,
+  .md label.item-radio input[type=radio]:checked~.icon-radio {
+    border-color: #482b7bed;
+  }
+
+  .md .radio input[type=radio]:checked~.icon-radio:after,
+  .md label.item-radio input[type=radio]:checked~* .icon-radio:after,
+  .md label.item-radio input[type=radio]:checked~.icon-radio:after {
+    background-color: #482b7bed;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  #map2Google{
+    border-radius: 5px;
+  }
 </style>
 <script>
   return {
@@ -81,40 +136,116 @@
     },
     on: {
       pageInit: function () {
-        var items = DB.criancas;
-        let data = { userID: localStorage.userID, type: localStorage.type, crecheID: localStorage.crecheID }
-        let url = 'http://201.6.243.44:3877/api/listagemDeCriancas';
-        fetch(url,
-          {
-            method: "post",
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          })
-          .then(res => res.json())
-          .then(res => {
-            localStorage.setItem('crianca', JSON.stringify(res))
-          })
-          .catch((error) => {
-            console.log('Request failure: ', error);
-          })
+        initMap()
+        $('Ambientais').hide()
+
+        $(document).ready(function () {
+          $('#CEP').change(function () {
+            // var logradouro = $('#logradouro').val();
+            // var numeroCasa = $('#numero-casa').val();
+            var CEP = $('#CEP').val();
+            if (!CEP) {
+              CEP = getCordUrl(map2.mapUrl)
+            } else {
+              centralizaMapaPeloForm(`${CEP}`, map2);
+            }
+          });
+
+
+          $('#tipoDeOcorrencia').change(function () {
+            var tipo = $('#tipoDeOcorrencia').val();
+
+            if (tipo == "Ambientais") {
+              $('#policiais').hide()
+              $('#ambientais').show()
+            } else {
+              $('#policiais').show()
+              $('#ambientais').hide()
+            }
+          });
+        });
       }
     },
     methods: {
-      confirmaSair: function () {
+      EviandoOcorrencia: function () {
+        var subcategoria;
         var $ = this.$;
         var app = this.$app;
         var router = this.$router;
-        app.dialog.confirm('Tem certesa que deseja sair?', function () {
-          app.dialog.alert('Até logo!');
-          // TODO: User Logout
-          app.popover.close('.popover-links');
-          router.navigate('/index/');
-        });
-      },
-      BTNprofile: function () {
-        app.popover.close('.popover-links');
+        if ($('#CEP').val() == "") {
+          console.log("HERE")
+          app.dialog.confirm('Deseja enviar essa posição no mapa?\n',
+            function () {
+              var categoria = $('#tipoDeOcorrencia').val();
+              if (categoria == "Ambientais") {
+                subcategoria = $('#ambientaisCategoria').val()
+              } else {
+                subcategoria = $('#policiaisCategoria').val()
+              }
+              let data = { localizacao: { lat: map2.center.lat(), lng: map2.center.lng() }, categoria, subcategoria }
+              let url = `${URLSERVER}/api/ocorrencia`
+              fetch(url,
+                {
+                  method: "post",
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(data)
+                })
+                .then(res => res.json())
+                .then(cadastro => {
+                  if (cadastro) {
+                    app.dialog.alert('Sinta-se orgulhoso por colaborar com a segurança da sua cidade!\n', function () {
+                      app.loginScreen.close();
+                      router.navigate('/menu/');
+                    })
+                  } else {
+                    app.dialog.alert('Error ao Cadastrar', function () {
+                      app.loginScreen.close();
+                    })
+                  }
+                })
+                .catch((error) => {
+                  console.log('Request failure: ', error);
+                })
+            }, function () {
+              app.loginScreen.close();
+            })
+        } else {
+          var categoria = $('#tipoDeOcorrencia').val();
+          if (categoria == "Ambientais") {
+            subcategoria = $('#ambientaisCategoria').val()
+          } else {
+            subcategoria = $('#policiaisCategoria').val()
+          }
+          let data = { localizacao: getCordUrl(map2.mapUrl), categoria, subcategoria }
+          let url = `${URLSERVER}/api/ocorrencia`
+          fetch(url,
+            {
+              method: "post",
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(cadastro => {
+              if (cadastro) {
+                app.dialog.alert('Sinta-se orgulhoso por colaborar com a segurança da sua cidade!\n', function () {
+                  app.loginScreen.close();
+                  router.navigate('/menu/');
+                })
+              } else {
+                app.dialog.alert('Error ao Cadastrar', function () {
+                  app.loginScreen.close();
+                })
+              }
+            })
+            .catch((error) => {
+              console.log('Request failure: ', error);
+            })
+
+        }
       }
     }
   }
