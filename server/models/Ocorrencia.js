@@ -5,8 +5,7 @@ const autopopulate = require('mongoose-autopopulate')
 const Ocorrencia = new Schema({
   localizacao: {
     lat: String,
-    lng: String,
-    required: true
+    lng: String
   },
   categoria: String,
   subcategoria: String,
