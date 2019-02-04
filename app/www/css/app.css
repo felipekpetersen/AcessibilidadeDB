@@ -104,7 +104,7 @@
 }
 
 .link-login-rec .link-login-rec-a{
-    color: #f3f3f3d8;
+    color: #f3f3f3;
 
 }
 
@@ -344,9 +344,10 @@
 	align-items: center;
 	align-content: stretch;
     background-color: #00e09a;
-    border-radius: 10px 10px 0 0;
-    height: 13vh;
+    border-radius: 5px;
+    height: 10vh;
     width: 80vw;
+
 }
 
 
@@ -359,7 +360,7 @@
 }
 
 .card-h-p2-a{
-    font-size: 3em;
+    font-size: 2em;
     margin: 0;
 }
 
@@ -569,4 +570,22 @@ input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:
     justify-content: center;
     align-items: center;
     align-content: center;
+}
+.login-screen-content .block, .login-screen-content .block-footer, .login-screen-content .block-header, .login-screen-content .list, .login-screen-content .login-screen-title {
+    max-width: 900px;
+    /* max-height: 500px; */
+}
+
+#button-login, #button-reset2{
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    height: 2em;
+    border-radius: 5px;
+}
+
+.link-login-rec{
+    font-size: 1em;
 }

@@ -2,7 +2,7 @@
   <div class="page">
     <div class="page-content background-menu">
       <div class="nav-perfil">
-        <a href="/menu/" class="link back">
+        <a href="/menu/" class="link">
           <i class="icon icon-back color-white"></i>
         </a>
       </div>
@@ -88,7 +88,7 @@
         <hr class="hr-personalizado">
 
         <div class="links-perfil">
-          <a @click="sair" class="color:#05c187">Sair</a>
+          <a @click="sair" id="links-perfil-a">Sair</a>
         </div>
       </div>
     </div>
@@ -129,12 +129,14 @@
 .card{
   opacity: 0.9;
 }
-.links-perfil a {
-    color: #95d2bf;
+#links-perfil-a {
+    color: #eee;
     margin: 0;
     font-size: 1.3em;
     margin-left: 15vw;
+    margin-right: 10vw;
 }
+
 </style>
 <script>
   return {

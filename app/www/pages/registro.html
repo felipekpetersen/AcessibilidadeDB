@@ -72,7 +72,6 @@
         var nome = $('#nome-registro').val();
         var email = $('#email-registro').val();
         var senha = $('#senha-registro').val();
-        console.log(nome, email, senha);
 
         let data = { email, senha, nome }
         let url = `${URLSERVER}/api/register`;
@@ -91,8 +90,6 @@
             })
             .then(res => res.json())
             .then(cadastro => {
-              console.log(cadastro);
-              
               if (cadastro) {
                 app.dialog.alert('Cadastrado Com Sucesso!\nAgora você já pode fazer Login.', function () {
                   app.loginScreen.close();

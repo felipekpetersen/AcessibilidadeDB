@@ -1,6 +1,5 @@
 var $ = Dom7;
 var URLSERVER = 'https://mogicidade.herokuapp.com'
-var DB = new dataBank();
 // Init App
 var app = new Framework7({
   name: 'App',

@@ -32,7 +32,6 @@ const requestAjax = (URL_TO_FETCH, func, method = 'get', contentJson = null) => 
 
 
 function initMap(localizacao = { lat: -23.547, lng: -46.213 }) {
-    console.log("sdfsdf");
 
     map = new google.maps.Map(document.getElementById('mapGoogle'), {
         center: { lat: -23.547, lng: -46.213 },
@@ -53,7 +52,6 @@ function initMap(localizacao = { lat: -23.547, lng: -46.213 }) {
 function initMarkers() {
     const iteraOcorrencia = (json) => {
         json.forEach(e => {
-            console.log(e)
             e.content = `${e.categoria}->${e.subcategoria} | ^ ${timestamp(e.createdAt)}`;
             addMarker(e);
         });
@@ -86,7 +84,7 @@ function centralizaMapaPeloForm(endereco, mapModf) {
         if (status === 'OK') {
             mapModf.setCenter(results[0].geometry.location);
         } else {
-            console.log("NÃ£o foi possivel obter localização: " + status);
+            console.log("Não foi possivel obter a localização: " + status);
         }
     });
 }

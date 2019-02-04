@@ -2,7 +2,7 @@
   <div class="page no-swipeback">
     <div class="page-content background-menu">
       <div class="nav-perfil">
-        <a href="/menu/" class="link back">
+        <a href="/menu/" class="link">
           <i class="icon icon-back color-white"></i>
         </a>
       </div>
@@ -109,19 +109,19 @@
 
   .md .toolbar {
     border-radius: 2px;
-    background-color: #482b7bed;
+    background-color: #482b7b;
   }
 
   .md .radio input[type=radio]:checked~.icon-radio,
   .md label.item-radio input[type=radio]:checked~* .icon-radio,
   .md label.item-radio input[type=radio]:checked~.icon-radio {
-    border-color: #482b7bed;
+    border-color: #482b7b;
   }
 
   .md .radio input[type=radio]:checked~.icon-radio:after,
   .md label.item-radio input[type=radio]:checked~* .icon-radio:after,
   .md label.item-radio input[type=radio]:checked~.icon-radio:after {
-    background-color: #482b7bed;
+    background-color: #482b7b;
     -webkit-transform: scale(1);
     transform: scale(1);
   }
@@ -174,7 +174,6 @@
         var app = this.$app;
         var router = this.$router;
         if ($('#CEP').val() == "") {
-          console.log("HERE")
           app.dialog.confirm('Deseja enviar essa posição no mapa?\n',
           function () {
             var categoria = $('#tipoDeOcorrencia').val();

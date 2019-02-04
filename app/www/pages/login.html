@@ -73,7 +73,7 @@
         var router = this.$router;
         if (localStorage.logged === 'true') {
           app.dialog.alert('Seja Bem Vindo ' + localStorage.email, function () {
-            app.loginScreen.close();
+            app.dialog.close();
             router.navigate('/menu/');
           })
         } else {
@@ -92,7 +92,6 @@
         var email = $('input#email').val();
         var senha = $('input#senha').val();
         let data = { email: email, senha: senha }
-        console.log(data);
         
         let url = `${URLSERVER}/api/login`
         if (email && senha) {
@@ -106,7 +105,6 @@
             })
             .then(res => res.json())
             .then(user => {
-              console.log(user);
               
               if (!user) {
                 app.dialog.alert('Dados inválidos', function () { });
