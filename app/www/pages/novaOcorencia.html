@@ -20,7 +20,8 @@
 
             <li class="item-content item-input item-input-with-value padding-none">
               <div class="flag-cep"><i class="f7-icons color-white icon-mate" style="font-size: 6vh;color: #3e397b;">flag_fill</i></div>
-              <div id="map2Google" style="height:35vh;width: 99vw;opacity: 0.8;"></div>
+              <div id="map2Google" style="height:35vh;width: 99vw;opacity: 1;"></div>
+              <div class="minha-localizacao-mini" @click='minhaLocalizacao'></div>
             </li>
             <div></div>
           </ul>
@@ -125,8 +126,30 @@
     -webkit-transform: scale(1);
     transform: scale(1);
   }
-  #map2Google{
+
+  #map2Google {
     border-radius: 5px;
+  }
+
+  .gps {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: flex-end;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+
+  }
+  .minha-localizacao-mini {
+    height: 2em;
+    width: 2em;
+    background-image: url(./img/minha-localizacao-2.png);
+    margin-left: 70vw;
+    margin-top: 12vh;
+    position: absolute;
   }
 </style>
 <script>
@@ -136,7 +159,7 @@
     },
     on: {
       pageInit: function () {
-        initMap()
+        initMapRegistro()
         $('Ambientais').hide()
 
         $(document).ready(function () {
@@ -168,33 +191,33 @@
     },
     methods: {
       EviandoOcorrencia: function () {
-        
+
         var subcategoria;
         var $ = this.$;
         var app = this.$app;
         var router = this.$router;
         if ($('#CEP').val() == "") {
           app.dialog.confirm('Deseja enviar essa posição no mapa?\n',
-          function () {
-            var categoria = $('#tipoDeOcorrencia').val();
-            if (categoria == "Ambientais") {
-              subcategoria = $('#ambientaisCategoria').val()
-            } else {
-              subcategoria = $('#policiaisCategoria').val()
-            }
-            let data = { localizacao: { lat: map2.center.lat(), lng: map2.center.lng() }, categoria, subcategoria }
-            let url = `${URLSERVER}/api/ocorrencia`
-            
-            let historico = JSON.parse(localStorage.getItem(localStorage.userID+'-historico'));
-            let dataLocal = data;
-            dataLocal.data = timestamp(new Date())
-            localStorage.setItem(localStorage.userID + '-historico', JSON.stringify(historico.concat([dataLocal])));
-            
-            fetch(url,
-            {
-              method: "post",
-              headers: {
-                'Content-Type': 'application/json'
+            function () {
+              var categoria = $('#tipoDeOcorrencia').val();
+              if (categoria == "Ambientais") {
+                subcategoria = $('#ambientaisCategoria').val()
+              } else {
+                subcategoria = $('#policiaisCategoria').val()
+              }
+              let data = { localizacao: { lat: map2.center.lat(), lng: map2.center.lng() }, categoria, subcategoria }
+              let url = `${URLSERVER}/api/ocorrencia`
+
+              let historico = JSON.parse(localStorage.getItem(localStorage.userID + '-historico'));
+              let dataLocal = data;
+              dataLocal.data = timestamp(new Date())
+              localStorage.setItem(localStorage.userID + '-historico', JSON.stringify(historico.concat([dataLocal])));
+
+              fetch(url,
+                {
+                  method: "post",
+                  headers: {
+                    'Content-Type': 'application/json'
                   },
                   body: JSON.stringify(data)
                 })
@@ -256,15 +279,15 @@
     }
   }
   function timestamp(timestamp) {
-  var a = new Date(timestamp)
-  var months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Otubro', 'Novembro', 'Dezembro']
-  var year = a.getFullYear()
-  var month = months[a.getMonth()]
-  var date = a.getDate()
-  var hour = a.getHours()
-  var min = a.getMinutes()
-  var sec = a.getSeconds()
-  var time = date + ' de ' + month + ' de ' + year + ' às ' + hour + ':' + min
-  return time
-}
+    var a = new Date(timestamp)
+    var months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Otubro', 'Novembro', 'Dezembro']
+    var year = a.getFullYear()
+    var month = months[a.getMonth()]
+    var date = a.getDate()
+    var hour = a.getHours()
+    var min = a.getMinutes()
+    var sec = a.getSeconds()
+    var time = date + ' de ' + month + ' de ' + year + ' às ' + hour + ':' + min
+    return time
+  }
 </script>

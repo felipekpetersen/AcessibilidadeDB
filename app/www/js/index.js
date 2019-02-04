@@ -30,8 +30,7 @@ const requestAjax = (URL_TO_FETCH, func, method = 'get', contentJson = null) => 
     }
 }
 
-
-function initMap(localizacao = { lat: -23.547, lng: -46.213 }) {
+function initMapOcorrencias(localizacao = { lat: -23.547, lng: -46.213 }) {
 
     map = new google.maps.Map(document.getElementById('mapGoogle'), {
         center: { lat: -23.547, lng: -46.213 },
@@ -39,14 +38,18 @@ function initMap(localizacao = { lat: -23.547, lng: -46.213 }) {
         disableDefaultUI: true
     });
     initMarkers();
+    geocoder = new google.maps.Geocoder();
+}
+
+function initMapRegistro(localizacao = { lat: -23.547, lng: -46.213 }) {
 
     map2 = new google.maps.Map(document.getElementById('map2Google'), {
         center: localizacao,
         zoom: 18,
         disableDefaultUI: true
     });
-    geocoder = new google.maps.Geocoder();
     initMarkers();
+    geocoder = new google.maps.Geocoder();
 }
 
 function initMarkers() {
@@ -105,6 +108,17 @@ $(document).ready(function () {
         centralizaMapaPeloForm(`${CEP}`, map2);
     });
 });
+
+function centralizaMapaMenu () {
+    navigator.geolocation.getCurrentPosition(
+       sucess =>{ 
+        console.log(sucess.coords.latitude + ' ' + sucess.coords.longitude );
+        let local = sucess.coords.latitude + ' ' + sucess.coords.longitude
+        centralizaMapaPeloForm(local, map);
+    }, error => {
+        console.log(error)
+    })
+}
 
 function timestamp(timestamp) {
     var a = new Date(timestamp)

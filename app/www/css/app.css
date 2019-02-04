@@ -238,21 +238,22 @@
     border-radius: 8px;
 }
 
-.perfil{
-    height: 14vh;
+.perfil {
+    height: 9vh;
     width: 100vw;
     display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: flex-end;
-	align-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-end;
+    align-content: center;
+    padding-top: 2vh;
 }
 
 .perfil .img-perfil{
     height: 8vh;
     width: 8vh;
-    margin-right: 10vw;
+    margin-right: 1vw;
     background-color: transparent;
     /* background-image: url("../img/   jose.jpg"); */
     background-position: center; /* Center the image */
