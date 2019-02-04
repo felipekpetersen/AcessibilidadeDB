@@ -1,4 +1,4 @@
-const urlMyApi = `http://192.168.0.34:3000/api/`;
+const urlMyApi = `${URLSERVER}/api/`;
 var map;
 
 const requestAjax = (URL_TO_FETCH, func, method = 'get', contentJson = null) => {
