@@ -2,38 +2,38 @@ const urlMyApi = `http://192.168.0.34:3000/api/`;
 var map;
 
 const requestAjax = (URL_TO_FETCH, func, method = 'get', contentJson = null) => {
-    if( method == 'get'){
+    if (method == 'get') {
         fetch(URL_TO_FETCH, {
-        method: 'get' // opcional 
+            method: 'get' // opcional 
         })
-        .then(response => { 
-         return response.json();
-        }).then( response => {
-            func(response);
-        })
-        .catch(function(err) { 
-            console.error(err); 
-        });
-    } else if (method == 'post'){
+            .then(response => {
+                return response.json();
+            }).then(response => {
+                func(response);
+            })
+            .catch(function (err) {
+                console.error(err);
+            });
+    } else if (method == 'post') {
         fetch(URL_TO_FETCH, {
-        method: 'post', // opcional 
-        body: contentJson
+            method: 'post', // opcional 
+            body: contentJson
         })
-        .then(response => { 
-        return response.json();
-        }).then( response => {
-            func(response);
-        })
-        .catch(function(err) { 
-            console.error(err); 
-        });
+            .then(response => {
+                return response.json();
+            }).then(response => {
+                func(response);
+            })
+            .catch(function (err) {
+                console.error(err);
+            });
     }
 }
 
 
 function initMap(localizacao = { lat: -23.547, lng: -46.213 }) {
     console.log("sdfsdf");
-    
+
     map = new google.maps.Map(document.getElementById('mapGoogle'), {
         center: { lat: -23.547, lng: -46.213 },
         zoom: 15,
@@ -42,62 +42,64 @@ function initMap(localizacao = { lat: -23.547, lng: -46.213 }) {
     initMarkers();
 
     map2 = new google.maps.Map(document.getElementById('map2Google'), {
-            center: localizacao,
-            zoom: 18,
-            disableDefaultUI: true
+        center: localizacao,
+        zoom: 18,
+        disableDefaultUI: true
+    });
+    geocoder = new google.maps.Geocoder();
+    initMarkers();
+}
+
+function initMarkers() {
+    const iteraOcorrencia = (json) => {
+        json.forEach(e => {
+            console.log(e)
+            e.content = `${e.categoria}->${e.subcategoria} | ^ ${timestamp(e.createdAt)}`;
+            addMarker(e);
         });
-        geocoder = new google.maps.Geocoder();
-        initMarkers();
     }
-    
-    function initMarkers(){
-        const iteraOcorrencia = (json) => {
-            json.forEach( e => {
-                e.content = `${e.categoria}->${e.subcategoria} | ^${e.data}`;
-                addMarker(e);
-            });
-        }
-        requestAjax(urlMyApi+'ocorrencias',iteraOcorrencia);
-    }
+    requestAjax(urlMyApi + 'ocorrencias', iteraOcorrencia);
+}
 
 
 
-function addMarker(obj){
+function addMarker(obj) {
+    let imagem = './img/icon.png'
     var marker = new google.maps.Marker({
-      position: { lat : parseFloat(obj.localizacao.lat), lng : parseFloat( obj.localizacao.lng)},
-      map: map,
-      icon: obj.marcador
+        position: { lat: parseFloat(obj.localizacao.lat), lng: parseFloat(obj.localizacao.lng) },
+        map: map,
+        icon: imagem
     });
-  
+
     var infoWindow = new google.maps.InfoWindow({
-      content: obj.content
+        content: obj.content
     });
-  
-    marker.addListener('click',function() {
-      infoWindow.open( map, marker);
-    });
-  }
 
-
-function centralizaMapaPeloForm(endereco, mapModf){
-    geocoder.geocode( {'address': endereco}, function( results, status){
-        if (status === 'OK') {
-            mapModf.setCenter( results[0].geometry.location);
-         } else {
-            console.log("NÃ£o foi possivel obter localização: " + status);
-         }
+    marker.addListener('click', function () {
+        infoWindow.open(map, marker);
     });
 }
 
-function getCordUrl(mapUrl){
-    let objPosition = {lat: 0, lng: 0};
+
+function centralizaMapaPeloForm(endereco, mapModf) {
+    geocoder.geocode({ 'address': endereco }, function (results, status) {
+        if (status === 'OK') {
+            mapModf.setCenter(results[0].geometry.location);
+        } else {
+            console.log("NÃ£o foi possivel obter localização: " + status);
+        }
+    });
+}
+
+function getCordUrl(mapUrl) {
+    let objPosition = { lat: 0, lng: 0 };
     let cords = mapUrl.match(/(\-\d\d\.\d\d\d\d)/g);
     objPosition.lat = cords[0];
     objPosition.lng = cords[1];
     return objPosition;
 }
-$(document).ready( function() {
-    $('#CEP').change(function(){
+$(document).ready(function () {
+    $('#CEP').change(function () {
         // var logradouro = $('#logradouro').val();
         // var numeroCasa = $('#numero-casa').val();
         debugger
@@ -105,3 +107,16 @@ $(document).ready( function() {
         centralizaMapaPeloForm(`${CEP}`, map2);
     });
 });
+
+function timestamp(timestamp) {
+    var a = new Date(timestamp)
+    var months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Otubro', 'Novembro', 'Dezembro']
+    var year = a.getFullYear()
+    var month = months[a.getMonth()]
+    var date = a.getDate()
+    var hour = a.getHours()
+    var min = a.getMinutes()
+    var sec = a.getSeconds()
+    var time = date + ' de ' + month + ' de ' + year + ' às ' + hour + ':' + min
+    return time
+}

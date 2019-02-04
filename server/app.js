@@ -8,7 +8,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 
 // MONGO
-require('./models/index')
+require('./models/Index')
 
 //ROUTERS
 var indexRouter = require('./routes/index');
