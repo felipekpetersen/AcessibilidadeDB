@@ -109,12 +109,15 @@ $(document).ready(function () {
     });
 });
 
-function centralizaMapaMenu () {
+function centralizaMapa (mapa) {
     navigator.geolocation.getCurrentPosition(
        sucess =>{ 
-        console.log(sucess.coords.latitude + ' ' + sucess.coords.longitude );
         let local = sucess.coords.latitude + ' ' + sucess.coords.longitude
-        centralizaMapaPeloForm(local, map);
+        if (mapa == 'menu')
+            centralizaMapaPeloForm(local, map);
+        else 
+            centralizaMapaPeloForm(local, map2);
+
     }, error => {
         console.log(error)
     })

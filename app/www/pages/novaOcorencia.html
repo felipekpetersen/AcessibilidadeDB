@@ -9,7 +9,7 @@
       <div class="padd-lr-5vw">
         <div class="list">
           <ul>
-            <li class="item-content item-input">
+            <li class="item-content item-input" style="padding-left: 2em;">
               <div class="item-inner">
                 <div class="item-input-wrap" style="margin-bottom: 30px;">
                   <input type="text" placeholder="Cep" id="CEP" name="cep" class="font-serrat input-with-value"
@@ -151,6 +151,16 @@
     margin-top: 12vh;
     position: absolute;
   }
+  .item-content{
+    margin: 10px;
+
+  }
+  .item-inner{
+    height: 2em;
+  }
+  #CEP{
+    margin-left: 1em;
+  }
 </style>
 <script>
   return {
@@ -190,8 +200,11 @@
       }
     },
     methods: {
+      minhaLocalizacao: ()=>{
+        centralizaMapa('novaOcorrencia')
+      },
       EviandoOcorrencia: function () {
-
+        
         var subcategoria;
         var $ = this.$;
         var app = this.$app;
