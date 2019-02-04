@@ -47,7 +47,7 @@
             </li>
             <li>
               <a class="item-link smart-select smart-select-init" data-open-in="sheet">
-                <select name="mac-windows" id="categoria">  
+                <select name="mac-windows" id="subcategoria">  
                     <option class="text-light-gray" value="Selecione" selected>Selecione</option>
                 </select>
                 <div class="item-content">
@@ -193,7 +193,7 @@
               options = options[0].subcategoria.map(e => {
                 return `<option class="text-light-gray" value="${e}">${e}</option>`
               })
-              $('#categoria').html(options)
+              $('#subcategoria').html(options)
             }
           });
 
@@ -206,28 +206,21 @@
         centralizaMapa('novaOcorrencia')
       },
       EviandoOcorrencia: function () {
-
-        var subcategoria;
-        var $ = this.$;
+        var categoria = $('#tipoDeOcorrencia').val();
+        var subcategoria = $('#subcategoria').val();
+        let url = `${URLSERVER}/api/ocorrencia`
         var app = this.$app;
         var router = this.$router;
         if ($('#CEP').val() == "") {
           app.dialog.confirm('Deseja enviar essa posição no mapa?\n',
             function () {
-              var categoria = $('#tipoDeOcorrencia').val();
-              if (categoria == "Ambientais") {
-                subcategoria = $('#ambientaisCategoria').val()
-              } else {
-                subcategoria = $('#policiaisCategoria').val()
-              }
               let data = { localizacao: { lat: map2.center.lat(), lng: map2.center.lng() }, categoria, subcategoria }
-              let url = `${URLSERVER}/api/ocorrencia`
-
               let historico = JSON.parse(localStorage.getItem(localStorage.userID + '-historico'));
               let dataLocal = data;
               dataLocal.data = timestamp(new Date())
               localStorage.setItem(localStorage.userID + '-historico', JSON.stringify(historico.concat([dataLocal])));
-
+              console.log(data);
+              
               fetch(url,
                 {
                   method: "post",
@@ -256,14 +249,7 @@
               app.loginScreen.close();
             })
         } else {
-          var categoria = $('#tipoDeOcorrencia').val();
-          if (categoria == "Ambientais") {
-            subcategoria = $('#ambientaisCategoria').val()
-          } else {
-            subcategoria = $('#policiaisCategoria').val()
-          }
           let data = { localizacao: getCordUrl(map2.mapUrl), categoria, subcategoria }
-          let url = `${URLSERVER}/api/ocorrencia`
           fetch(url,
             {
               method: "post",
