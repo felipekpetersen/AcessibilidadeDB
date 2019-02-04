@@ -31,24 +31,24 @@
             <li>
               <a class="item-link smart-select smart-select-init" data-open-in="sheet">
                 <select name="mac-windows" id="tipoDeOcorrencia">
-                  <option class="text-light-gray" value="Policiais" selected>Policiais</option>
-                  <option class="text-light-gray" value="Ambientais">Ambientais</option>
+                  <option class="text-light-gray" value="Selecione" selected>Selecione</option>
+                  {{#each categoria}}
+                  <option class="text-light-gray" value="{{this}}">{{this}}</option>
+                  {{/each}}
                 </select>
 
                 <div class="item-content">
                   <div class="item-inner ">
-                    <div class="item-title text-light-gray">Tipo</div>
+                    <div class="item-title text-light-gray">Tipo de Ocorrência</div>
                   </div>
                 </div>
 
               </a>
             </li>
             <li>
-              <a class="item-link smart-select smart-select-init" id="policiais" data-open-in="sheet">
-                <select name="mac-windows" id="policiaisCategoria">
-                  <option class="text-light-gray" value="Roubo" selected>Roubo</option>
-                  <option class="text-light-gray" value="Furto">Furto</option>
-                  <option class="text-light-gray" value="Violência contra mulher">Violência contra mulher</option>
+              <a class="item-link smart-select smart-select-init" data-open-in="sheet">
+                <select name="mac-windows" id="categoria">  
+                    <option class="text-light-gray" value="Selecione" selected>Selecione</option>
                 </select>
                 <div class="item-content">
                   <div class="item-inner">
@@ -56,20 +56,6 @@
                   </div>
                 </div>
               </a>
-
-              <a class="item-link smart-select smart-select-init" id="ambientais" data-open-in="sheet" style="display: none;">
-                <select name="mac-windows" id="ambientaisCategoria">
-                  <option value="Lixo" selected>Lixo</option>
-                  <option value="Ocupações">Ocupações</option>
-                </select>
-                <div class="item-content">
-                  <div class="item-inner ">
-                    <div class="item-title text-light-gray">Categoria</div>
-                  </div>
-                </div>
-              </a>
-
-
             </li>
             <li>
               <a href="#" class="list-button" id="button-reset3" @click="EviandoOcorrencia" style="text-align:center">Registrar</a>
@@ -143,6 +129,7 @@
     position: absolute;
 
   }
+
   .minha-localizacao-mini {
     height: 2em;
     width: 2em;
@@ -151,26 +138,40 @@
     margin-top: 12vh;
     position: absolute;
   }
-  .item-content{
+
+  .item-content {
     margin: 10px;
 
   }
-  .item-inner{
+
+  .item-inner {
     height: 2em;
   }
-  #CEP{
+
+  #CEP {
     margin-left: 1em;
   }
 </style>
 <script>
   return {
     data: function () {
-      return { titulo: 'Menu', nomeDeUsuario: this.$app.data.username }
+      return {
+        titulo: 'Menu',
+        nomeDeUsuario: this.$app.data.username,
+        categoria: ['Ambiental', 'Policiais'],
+        subcategoria: [{ Policiais: ['Roubo', 'Furto', 'Violência contra mulher']} , { Ambiental: ['Lixo', 'Ocupações']} ]
+
+      }
     },
     on: {
       pageInit: function () {
+        //Func
         initMapRegistro()
-        $('Ambientais').hide()
+
+        //Val
+        let subcategoria = [{ categoria: 'Policiais', subcategoria: ['Roubo', 'Furto', 'Violência contra mulher'] },
+        { categoria: 'Ambiental', subcategoria: ['Lixo', 'Ocupações'] }]
+        
 
         $(document).ready(function () {
           $('#CEP').change(function () {
@@ -187,24 +188,25 @@
 
           $('#tipoDeOcorrencia').change(function () {
             var tipo = $('#tipoDeOcorrencia').val();
-
-            if (tipo == "Ambientais") {
-              $('#policiais').hide()
-              $('#ambientais').show()
-            } else {
-              $('#policiais').show()
-              $('#ambientais').hide()
+            if(tipo != 'Selecione'){
+              let options = subcategoria.filter(elementos => (elementos['categoria'] == tipo))
+              options = options[0].subcategoria.map(e => {
+                return `<option class="text-light-gray" value="${e}">${e}</option>`
+              })
+              $('#categoria').html(options)
             }
           });
+
+
         });
       }
     },
     methods: {
-      minhaLocalizacao: ()=>{
+      minhaLocalizacao: () => {
         centralizaMapa('novaOcorrencia')
       },
       EviandoOcorrencia: function () {
-        
+
         var subcategoria;
         var $ = this.$;
         var app = this.$app;
