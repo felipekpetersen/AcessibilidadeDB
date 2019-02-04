@@ -553,9 +553,20 @@ input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:
 }
 
 .icon-mate{
-    margin: 0 50%;
+    /* margin: 0 50%;
     position: absolute;
-    top: 100px;
+    top: 100px; */
     z-index: 100;
-    margin-left: 159px;
+    /* margin-left: 159px; */
+}
+.flag-cep{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 }
