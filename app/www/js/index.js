@@ -88,6 +88,9 @@ function centralizaMapaPeloForm(endereco, mapModf) {
             mapModf.setCenter(results[0].geometry.location);
         } else {
             console.log("Não foi possivel obter a localização: " + status);
+            this.app.dialog.alert('Erro: ' + status, function () {
+                app.dialog.close();
+            })
         }
     });
 }
@@ -109,18 +112,21 @@ $(document).ready(function () {
     });
 });
 
-function centralizaMapa (mapa) {
+function centralizaMapa(mapa) {
     navigator.geolocation.getCurrentPosition(
-       sucess =>{ 
-        let local = sucess.coords.latitude + ' ' + sucess.coords.longitude
-        if (mapa == 'menu')
-            centralizaMapaPeloForm(local, map);
-        else 
-            centralizaMapaPeloForm(local, map2);
+        sucess => {
+            let local = sucess.coords.latitude + ' ' + sucess.coords.longitude
+            if (mapa == 'menu')
+                centralizaMapaPeloForm(local, map);
+            else
+                centralizaMapaPeloForm(local, map2);
 
-    }, error => {
-        console.log(error)
-    })
+        }, error => {
+            console.log(error)
+            this.app.dialog.alert('Erro: ' + error.code + error.message, function () {
+                app.dialog.close();
+            })
+        })
 }
 
 function timestamp(timestamp) {

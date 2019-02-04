@@ -12,6 +12,12 @@
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.MaatheusGois.merxfintech"
+    },
+    "cordova.plugins.diagnostic": {
+      "PACKAGE_NAME": "com.MaatheusGois.merxfintech"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.MaatheusGois.merxfintech"
     }
   },
   "dependent_plugins": {}

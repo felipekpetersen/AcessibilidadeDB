@@ -21,16 +21,16 @@
 
 
 
-      
-      
+
+
       <div class="list btn-nova-ocorrencia" style="text-align:center">
-          <ul>
-            <li>
-                <div class="minha-localizacao" @click='minhaLocalizacao'></div>
+        <ul>
+          <li>
+            <div class="minha-localizacao" @click='minhaLocalizacao'></div>
           </li>
-            <li class="display-flex-center">
-              <a href="/novaOcorencia/" class="list-button" id="button-reset3" style="width:81vw">Nova Ocorrência</a>
-            </li>
+          <li class="display-flex-center">
+            <a href="/novaOcorencia/" class="list-button" id="button-reset3" style="width:81vw">Nova Ocorrência</a>
+          </li>
         </ul>
       </div>
 
@@ -94,20 +94,27 @@
     margin-left: 80vw;
     margin-bottom: 15px;
   }
-  .display-flex-center{
+
+  .display-flex-center {
     display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
   }
-  .perfil{
+
+  .perfil {
     height: 12vh;
   }
-  .fa, .fab, .fal, .far, .fas {
+
+  .fa,
+  .fab,
+  .fal,
+  .far,
+  .fas {
     margin-left: -5vw;
-}
+  }
 </style>
 
 <script>
@@ -121,8 +128,9 @@
       }
     },
     methods: {
-      minhaLocalizacao: ()=>{
+      minhaLocalizacao: () => {
         centralizaMapa('menu')
+
       }
     }
   }
