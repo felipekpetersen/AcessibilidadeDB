@@ -1,6 +1,6 @@
 # Template of Login
 
-**Login** template of login made in nodejs using API.
+**Login** template of login made in nodejs using API and JSON.
 
 ### Dependencies 
 
@@ -21,4 +21,64 @@ $ npm install
 
 ```shell
 $ npm start
+```
+
+### API - Application Programming Interface
+
+#### Register
+
+send to `<YourURL.com>/api/register/`
+
+```
+{ 
+    'name' : <name>,
+    'email' : <email>,
+    'password' : <password>
+}
+```
+
+result if sucess:
+
+```
+{
+     'result': true
+}
+```
+
+else:
+
+```
+{
+    'result': false
+⁾)
+```
+
+#### Login
+
+send to `<YourURL.com>/api/login/`
+
+```
+{ 
+    'email' : <email>,
+    'password' : <password>
+}
+```
+
+
+result if sucess:
+
+```
+{
+    'name': <user_name>,
+    'email' : <user_email>,
+    'password' : <user_password>
+}
+```
+
+else:
+
+```
+{
+    'result' : 'false'
+}
 ```
