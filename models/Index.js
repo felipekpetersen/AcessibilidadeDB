@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 
 require('./User')
-require('./Ocorrencia')
 
 const options = {
   autoIndex: false, // Don't build indexes
@@ -17,8 +16,9 @@ const options = {
 };
 
 
-//Em Produção
-mongoose.connect('mongodb://admin:admin123@ds011715.mlab.com:11715/mogicidade', options)
+urlDataBase = "Url" // Set your Data Base URL here
+//Production
+mongoose.connect(urlDataBase, options)
 
 
 const db = mongoose.connection

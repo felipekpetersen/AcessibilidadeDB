@@ -8,7 +8,7 @@ const User = new Schema({
     type: String,
     required: true
   },
-  senha: {
+  password: {
     type: String,
     required: true
   },
@@ -19,13 +19,13 @@ const User = new Schema({
   }
 })
 
-User.methods.checkPassword = function (senha) {
-  let resut = this.senha === md5(senha)
+User.methods.checkPassword = function (password) {
+  let resut = this.password === md5(password)
   return resut
 }
 
-User.methods.hashPassword = function (senha) {
-  return md5(senha)
+User.methods.hashPassword = function (password) {
+  return md5(password)
 }
 
 User.plugin(autopopulate)
