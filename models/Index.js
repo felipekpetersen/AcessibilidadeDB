@@ -12,11 +12,12 @@ const options = {
   bufferMaxEntries: 0,
   connectTimeoutMS: 10000, // Give up initial connection after 10 seconds
   socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-  family: 4
+  family: 4,
+  useNewUrlParser: true
 };
 
 
-urlDataBase = "Url" // Set your Data Base URL here
+urlDataBase = "mongodb://tests:tests123@ds149806.mlab.com:49806/tests" // Set your Data Base URL here
 //Production
 mongoose.connect(urlDataBase, options)
 
