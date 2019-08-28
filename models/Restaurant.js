@@ -23,11 +23,51 @@ const Restaurant = new Schema({
     type: String,
     required: true
   },
+  // menus: [{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //     ref: 'Menu',
+  //     autopopulate: true
+  // }]
   menus: [{
-    type: mongoose.Schema.Types.ObjectId,
-      ref: 'Menu',
-      autopopulate: true
+    name: {
+      type: String,
+      required: true
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    categories: [{
+      name: {
+        type: String,
+        required: true
+      },
+      plates: [{
+        name: {
+          type: String,
+          required: true
+        },
+        description: {
+          type: String,
+          required: true,
+        },
+        price: {
+          type: String,
+          required: true,
+        },
+        tag: [{
+          type: String,
+          required: true,
+        }],
+        tagIlustration: {
+          type: String,
+          required: true,
+        }
+      }]
+    
+    }]
   }]
+  
 
 }, {timestamps: true})
 

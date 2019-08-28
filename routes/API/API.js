@@ -28,11 +28,8 @@ router.post('/register', async function (req, res, next) {
 });
 
 router.post('/postRestaurant', async function (req, res, next) {
-    try {
-        (req.body.menus).forEach(element => {
-            
-        });
-        let newMenu = new Menu(req.body.menu)
+    try {   
+
         let newRestaurant = new Restaurant(req.body)
         await newRestaurant.save()
         console.log(newRestaurant)
