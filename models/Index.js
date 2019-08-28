@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 
 
 require('./User')
+require('./Category')
+require('./Menu')
+require('./Plate')
+require('./Restaurant')
 
 const options = {
   autoIndex: false, // Don't build indexes

@@ -2,12 +2,18 @@ var express = require('express');
 var router = express.Router();
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
+const Plate = mongoose.model('Plate')
+const Menu = mongoose.model('Menu')
+const Category = mongoose.model('Category')
+const Restaurant = mongoose.model('Restaurant')
 
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.send('Api Funcionando!');
 });
+
+
 
 router.post('/register', async function (req, res, next) {
     try {
@@ -20,6 +26,35 @@ router.post('/register', async function (req, res, next) {
         res.json({ result: false })
     }
 });
+
+router.post('/postRestaurant', async function (req, res, next) {
+    try {
+        (req.body.menus).forEach(element => {
+            
+        });
+        let newMenu = new Menu(req.body.menu)
+        let newRestaurant = new Restaurant(req.body)
+        await newRestaurant.save()
+        console.log(newRestaurant)
+        res.json({ result: true })
+
+    } catch (err) {
+        console.log('Error: ', err)
+        res.json({ result: false })
+    }
+});
+
+router.get('/getRestaurants', async function (req, res, next) {
+    try {
+        let response = Restaurant.find()
+        res.json({ response })
+
+    } catch (err) {
+        console.log('Error: ', err)
+        res.json({ result: false })
+    }
+});
+
 
 router.post('/login', async function (req, res, next) {
     let email = req.body.email
