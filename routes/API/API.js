@@ -43,7 +43,7 @@ router.post('/postRestaurant', async function (req, res, next) {
 
 router.get('/getRestaurants', async function (req, res, next) {
     try {
-        let response = Restaurant.find({})
+        let response = await Restaurant.find({})
         res.json({ response })
 
     } catch (err) {
