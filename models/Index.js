@@ -21,7 +21,8 @@ const options = {
 };
 
 
-urlDataBase = "mongodb+srv://guekavi:mudar123@guekavi-45w67.mongodb.net/test?retryWrites=true&w=majority" // Set your Data Base URL here
+// urlDataBase = "mongodb+srv://guekavi:mudar123@guekavi-45w67.mongodb.net/test?retryWrites=true&w=majority" // Set your Data Base URL here
+urlDataBase = "mongodb://admin:admin123@ds311968.mlab.com:11968/gkv" // Set your Data Base URL here
 //Production
 mongoose.connect(urlDataBase, options)
 
