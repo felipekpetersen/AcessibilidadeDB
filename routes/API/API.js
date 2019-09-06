@@ -12,7 +12,7 @@ const Restaurant = mongoose.model('Restaurant')
 //Multer
 var Storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, "../../public/images");
+        callback(null, "./");
     },
     filename: async function (req, file, callback) {
         callback(null, file.originalname);
