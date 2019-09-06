@@ -11,6 +11,14 @@ const Restaurant = new Schema({
     type: String,
     required: true
   },
+  latitude: {
+    type: String,
+    required: true
+  },
+  longitude: {
+    type: String,
+    required: true
+  },
   description: {
     type: String,
     required: true,
@@ -23,11 +31,6 @@ const Restaurant = new Schema({
     type: String,
     required: true
   },
-  // menus: [{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //     ref: 'Menu',
-  //     autopopulate: true
-  // }]
   menus: [{
     name: {
       type: String,
@@ -52,6 +55,10 @@ const Restaurant = new Schema({
           required: true,
         },
         price: {
+          type: String,
+          required: true,
+        },
+        priceInt: {
           type: String,
           required: true,
         },

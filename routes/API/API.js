@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var multer = require('multer')
+
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 const Plate = mongoose.model('Plate')
@@ -7,25 +9,51 @@ const Menu = mongoose.model('Menu')
 const Category = mongoose.model('Category')
 const Restaurant = mongoose.model('Restaurant')
 
+//Multer
+var Storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, "../../public/images");
+    },
+    filename: async function (req, file, callback) {
+        callback(null, file.originalname);
+    }
+});
+
+var upload = multer({
+    storage: Storage
+}).array("imgUploader", 3)
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.send('Api Funcionando!');
 });
 
-
-
-router.post('/register', async function (req, res, next) {
+router.post("/upload", function (req, res) {
     try {
-        let newUser = new User(req.body)
-        newUser.password = newUser.hashPassword(newUser.password)
-        await newUser.save()
-        res.json({ result: true })
+        upload(req, res, function (err) {
+            if (err) {
+                return res.json({ result: false });
+            }
+            return res.json({ result: true });
+        });
     } catch (err) {
-        console.log('Error: ', err)
-        res.json({ result: false })
+        console.log(err)
+        return res.json({ result: false });
     }
 });
+
+// router.post('/register', async function (req, res, next) {
+//     try {
+//         let newUser = new User(req.body)
+//         newUser.password = newUser.hashPassword(newUser.password)
+//         await newUser.save()
+//         res.json({ result: true })
+//     } catch (err) {
+//         console.log('Error: ', err)
+//         res.json({ result: false })
+//     }
+// });
 
 router.post('/postRestaurant', async function (req, res, next) {
     try {   
@@ -53,23 +81,23 @@ router.get('/getRestaurants', async function (req, res, next) {
 });
 
 
-router.post('/login', async function (req, res, next) {
-    let email = req.body.email
-    let password = req.body.password
+// router.post('/login', async function (req, res, next) {
+//     let email = req.body.email
+//     let password = req.body.password
 
-    try {
-        let user = await User.findOne({
-            email: email
-        }).exec()
-        if (user && user.checkPassword(password)) {
-            res.json(user)
-        } else {
-            res.json({ result: false })
-        }
-    } catch (err) {
-        res.json({ result: false })
-    }
-});
+//     try {
+//         let user = await User.findOne({
+//             email: email
+//         }).exec()
+//         if (user && user.checkPassword(password)) {
+//             res.json(user)
+//         } else {
+//             res.json({ result: false })
+//         }
+//     } catch (err) {
+//         res.json({ result: false })
+//     }
+// });
 
 
 
