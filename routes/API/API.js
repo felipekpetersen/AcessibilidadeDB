@@ -12,7 +12,7 @@ const Restaurant = mongoose.model('Restaurant')
 //Multer
 var Storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, "./");
+        callback(null, "./public/images");
     },
     filename: async function (req, file, callback) {
         callback(null, file.originalname);
@@ -45,7 +45,7 @@ router.post("/upload", function (req, res) {
 
 // router.post('/register', async function (req, res, next) {
 //     try {
-//         let newUser = new User(req.body)
+//         let newUse   r = new User(req.body)
 //         newUser.password = newUser.hashPassword(newUser.password)
 //         await newUser.save()
 //         res.json({ result: true })
