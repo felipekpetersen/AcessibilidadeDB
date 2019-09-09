@@ -59,6 +59,7 @@ router.post('/postRestaurant', async function (req, res, next) {
     try {   
 
         let newRestaurant = new Restaurant(req.body)
+        console.log(newRestaurant)
         await newRestaurant.save()
         console.log(newRestaurant)
         res.json({ result: true })
