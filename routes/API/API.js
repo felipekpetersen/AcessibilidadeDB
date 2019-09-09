@@ -95,6 +95,8 @@ router.post('/deleteAll', async function (req, res, next) {
         Category.remove({}, function (err, removed) {
             console.log(User.length)
           });
+
+        res.json({ result: true })
     } catch (err) {
         res.json({ result: false })
       }
