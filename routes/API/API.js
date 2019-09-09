@@ -80,6 +80,27 @@ router.get('/getRestaurants', async function (req, res, next) {
     }
 });
 
+router.post('/deleteAll', async function (req, res, next) {
+    try {
+
+        Restaurant.remove({}, function (err, removed) {
+          console.log(User.length)
+        });
+        Plate.remove({}, function (err, removed) {
+            console.log(User.length)
+          });
+        Menu.remove({}, function (err, removed) {
+            console.log(User.length)
+          });
+        Category.remove({}, function (err, removed) {
+            console.log(User.length)
+          });
+    } catch (err) {
+        res.json({ result: false })
+      }
+
+});
+
 
 // router.post('/login', async function (req, res, next) {
 //     let email = req.body.email
