@@ -16,7 +16,7 @@ const Plate = new Schema({
     required: true,
   },
   priceDouble: {
-    type: Double,
+    type: Number,
     required: true,
   },
   tag: [{
