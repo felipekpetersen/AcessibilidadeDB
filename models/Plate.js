@@ -15,6 +15,10 @@ const Plate = new Schema({
     type: String,
     required: true,
   },
+  priceDouble: {
+    type: Double,
+    required: true,
+  },
   tag: [{
     type: String,
     required: true,
