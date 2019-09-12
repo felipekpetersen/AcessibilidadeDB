@@ -58,7 +58,7 @@ const Restaurant = new Schema({
           type: String,
           required: true,
         },
-        priceInt: {
+        priceDouble: {
           type: String,
           required: true,
         },
